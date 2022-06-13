@@ -1,6 +1,7 @@
-from assets.funcoes import cabecario
+from assets.funcoes import cabecario, limparTela
 import time
-
+limparTela()
+cabecario()
 while True:
     desafiante = input('Desafiente: ')
     if len(desafiante) < 1:
@@ -24,6 +25,7 @@ arquivoPL.write(f'PALAVRA > {palavra}')
 arquivoPL.write('\n')
 arquivoPL.close()
 
+palavraS = '*' * len(palavra)
 
 def jogo():
     while True:
@@ -47,7 +49,7 @@ def jogo():
 
     digitados = []
     chance = 6
-
+    
     while True:
 
         print('(1) jogar')
@@ -55,8 +57,11 @@ def jogo():
         print('(3) dar um chute: ')
         lol = input()
         if lol =='1':
+            print(palavraS)
             letra = input('Competidor, digite uma letra: ')
-            
+            if letra in digitados:
+                print('Você ja chutou essa letra')
+                continue
             if len(letra) > 1:
                 print('ERROR, Digitar mais que uma letra não pode campeão!!!')
                 continue
