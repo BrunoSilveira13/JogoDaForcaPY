@@ -26,10 +26,24 @@ arquivoPL.close()
 
 
 def jogo():
-   
-    dica1 = input('digite a dica 1: ')
-    dica2 = input('digite a dica 2: ')
-    dica3 = input('digite a dica 3: ')
+    while True:
+        dica1 = input('digite a dica 1: ')
+        if len(dica1) < 1:
+            print('A dica deve conter no minimo uma caractere!')
+        else:
+            break
+    while True:
+        dica2 = input('digite a dica 2: ')
+        if len(dica2) < 1:
+            print('A dica deve conter no minimo uma caractere!')
+        else:
+            break
+    while True:
+        dica3 = input('digite a dica 3: ')
+        if len(dica3) < 1:
+            print('A dica deve conter no minimo uma caractere!')
+        else:
+            break
 
     digitados = []
     chance = 6
