@@ -5,3 +5,5 @@ def cabecario():
     print('-=' * 20 )
 def limparTela():
     os.system('cls')
+def mudarCor():
+    os.system('color 2')

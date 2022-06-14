@@ -1,5 +1,6 @@
-from assets.funcoes import cabecario, limparTela
+from assets.funcoes import cabecario, limparTela, mudarCor
 import time
+mudarCor()
 limparTela()
 cabecario()
 while True:
@@ -14,7 +15,8 @@ while True:
         print("O nome do competidor não pode conter menos de uma caractere! ")
     else:
         break
-
+limparTela()
+cabecario()
 palavra = input('digite a palavra: ')
 arquivoPL = open('players.txt', 'w')
 arquivoPL.write(f'DESAFIANTE > {desafiante}')
@@ -26,7 +28,6 @@ arquivoPL.write('\n')
 arquivoPL.close()
 
 palavraS = '*' * len(palavra)
-
 def jogo():
     while True:
         dica1 = input('digite a dica 1: ')
@@ -49,23 +50,26 @@ def jogo():
 
     digitados = []
     chance = 6
-    
+    limparTela()
+    cabecario()
+    print('Palavra secreta: ', palavraS)
+    print(f'O competidor ainda tem {chance} chances. ')
     while True:
-
         print('(1) jogar')
         print('(2) pedir uma dica')
         print('(3) dar um chute: ')
         lol = input()
+        limparTela()
+        cabecario()
         if lol =='1':
-            print(palavraS)
             letra = input('Competidor, digite uma letra: ')
-            if letra in digitados:
-                print('Você ja chutou essa letra')
-                continue
+            limparTela()
+            cabecario()
+            
             if len(letra) > 1:
                 print('ERROR, Digitar mais que uma letra não pode campeão!!!')
                 continue
-            
+           
             digitados.append(letra)
             secreto_temp = ''
             for letra_secre in palavra:
@@ -73,13 +77,15 @@ def jogo():
                     secreto_temp += letra_secre
                 else:
                     secreto_temp += '*'
-
+            
             if secreto_temp == palavra:
                 print('PARABÉNS, O COMPETIDOR GANHAOU !!!')
                 break
             else:
                 print(f'Palavra secreta: {secreto_temp}')
-            
+            if letra in digitados:
+                print('Você ja chutou essa letra')
+                continue
             if letra not in palavra:
                 chance -= 1
             
@@ -95,12 +101,14 @@ def jogo():
             print('(3) dica 03')
             dicaEscolida = input()
             if dicaEscolida == '1':
-                print(dica1)
+                print('A dica 01 é ', dica1)
             elif dicaEscolida == '2':
-                print(dica2)
+                print('A dica 02 é ', dica2)
             elif dicaEscolida == '3':
-                print(dica3)
+                print('A dica 03 é ', dica3)
             time.sleep(4)
+            limparTela()
+            cabecario()
         elif lol == '3':
             chuteR = input('de o seu chute: ')
             if chuteR == palavra:
