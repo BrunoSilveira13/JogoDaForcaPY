@@ -1,56 +1,68 @@
-from assets.funcoes import cabecario, limparTela, mudarCor
+from assets.funcoes import cabecario, forcaSozinha, limparTela, caveiraPerderdor, desenhaForca, trofeuGanhador
 import time
-mudarCor()
+
 limparTela()
 cabecario()
+
 while True:
-    desafiante = input('Desafiante: ')
+    print('Desafiante:')
+    desafiante = input('> ')
     if len(desafiante) < 1:
-        print("O nome do desafiante não pode conter menos de uma caractere! ")
+        print("\033[1;31mO nome do desafiante não pode conter menos de uma caractere! \033[m")
     else:
         break
 while True:
-    competidor = input('Competidor: ')
+    print('Competidor: ')
+    competidor = input('> ')
     if len(competidor) < 1:
-        print("O nome do competidor não pode conter menos de uma caractere! ")
+        print("\033[1;31mO nome do competidor não pode conter menos de uma caractere! \033[m")
     else:
         break
 limparTela()
 cabecario()
-palavra = input('digite a palavra: ')
-
+while True:
+    print('digite a palavra: ')
+    palavra = input('> ')
+    if len(palavra) < 1:
+        print('\033[1;31mA palavra não faz sentido!\033[m')
+    else:
+        break
 palavraS = ' *' * len(palavra)
-
+dicaErro = ('\033[1;31mA dica deve conter no minimo uma caractere!\033[m')
 while True:
     dica1 = input('digite a dica 1: ')
     if len(dica1) < 1:
-        print('A dica deve conter no minimo uma caractere!')
+        print(dicaErro)
     else:
         break
 while True:
     dica2 = input('digite a dica 2: ')
     if len(dica2) < 1:
-        print('A dica deve conter no minimo uma caractere!')
-    else:
+        print(dicaErro)
+    else:    
         break
 while True:
     dica3 = input('digite a dica 3: ')
     if len(dica3) < 1:
-        print('A dica deve conter no minimo uma caractere!')
+        print(dicaErro)
     else:
         break
 
 digitados = []
 chance = 6
+erros = 0
 limparTela()
 cabecario()
+
 print('Palavra secreta:', palavraS)
+print()
 print(f'O competidor ainda tem {chance} chances. ')
+print()
 while True:
     print('(1) jogar')
     print('(2) pedir uma dica')
     print('(3) dar um chute: ')
-    lol = input()
+    lol = input('>')
     limparTela()
     cabecario()
     if lol =='1':
@@ -69,23 +81,35 @@ while True:
                 secreto_temp += letra_secre
             else:
                 secreto_temp += ' *'
-        
         if secreto_temp == palavra:
-            print('Parabéns, o competidor GANHAOU !!!')
-            vencedor = (f'\nCompetidor VENCEDOR > {competidor}\nDesafiante PERDEDOR > {desafiante}\nPalavra > {palavra}\n')
+            limparTela()
+            print(f'Parabéns, o competidor {competidor} GANHOU !!!')
+            print(f'A palavra era {palavra}')
+            trofeuGanhador()
+            vencedor = (f'\nDesafiante PERDEDOR > {competidor}\nCompetidor VENCEDOR > {desafiante}\nPalavra > {palavra}\n')
+            print('Aperte ENTER pra sair')
+            input() 
             break
         else:
+            
             print(f'Palavra secreta: {secreto_temp}')
-        
+            print()
+
         if letra not in palavra:
             chance -= 1
-        # if not letra in letra_secre:
-        #     print('Você ja chutou essa letra')
-        #     continue
+            erros += 1
+            desenhaForca(erros)
+            print(f'Palavra secreta: {secreto_temp}')
+            print('\033[1;31mVocê errou!       \033[m')
 
-        if chance <= 0:
+        if erros >= 6:
+            limparTela()
             print(f'Não foi dessa vez, o desafiante {desafiante} ganhou!')
+            print(f'A palavra era {palavra}\n')
+            caveiraPerderdor()
             vencedor = (f'\nDesafiante VENCEDOR > {competidor}\nCompetidor PERDEDOR > {desafiante}\nPalavra > {palavra}\n')
+            print('Aperte ENTER pra sair')
+            input()
             break
         print(f'O competidor ainda tem {chance} chances. ')
         print()
@@ -107,12 +131,18 @@ while True:
     elif lol == '3':
         chuteR = input('De o seu chute: ')
         if chuteR == palavra:
-            print('Parabéns, o competidor GANHOU !!!')
-            vencedor = (f'\nDesafiante PERDEDOR > {desafiante}\nCompetidor VENCEDOR > {competidor}\nPalavra > {palavra}\n') 
-            input()  
+            limparTela()
+            print(f'Parabéns, o competidor {competidor} GANHOU !!!')
+            print(f'A palavra era {palavra}')
+            trofeuGanhador()
+            vencedor = (f'\nDesafiante PERDEDOR > {competidor}\nCompetidor VENCEDOR > {desafiante}\nPalavra > {palavra}\n')
+            print('Aperte ENTER pra sair')
+            input() 
             break 
         elif chuteR != palavra:
+            erros +=1
             chance -= 1
+            desenhaForca(erros)
             print(f'O competidor ainda tem {chance} chances. ')
             continue
 
@@ -136,7 +166,3 @@ while True:
             except:
                 arquivo = open('arquivo.txt','w')
                 arquivo.close()
-                
-                    
-
-

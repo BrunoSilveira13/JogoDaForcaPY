@@ -1,0 +1,20 @@
+
+Desafiante PERDEDOR > brunp
+Competidor VENCEDOR > pedro
+Palavra > livro
+
+
+Desafiante PERDEDOR > bruno
+Competidor VENCEDOR > pedro
+Palavra > livro
+
+
+Desafiante PERDEDOR > bruno
+Competidor VENCEDOR > pedro
+Palavra > livro
+
+
+Desafiante PERDEDOR > pedro
+Competidor VENCEDOR > bruno
+Palavra > livro
+
