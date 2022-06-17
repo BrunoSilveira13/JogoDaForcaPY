@@ -1,4 +1,4 @@
-from assets.funcoes import cabecario, forcaSozinha, limparTela, caveiraPerderdor, desenhaForca, trofeuGanhador
+from assets.funcoes import cabecario, limparTela, caveiraPerderdor, desenhaForca, trofeuGanhador
 import time
 
 limparTela()
@@ -65,6 +65,7 @@ while True:
     lol = input('>')
     limparTela()
     cabecario()
+    secreto_temp = ''
     if lol =='1':
         letra = input('Competidor, digite uma letra: ')
         limparTela()
@@ -75,7 +76,7 @@ while True:
             continue
         
         digitados.append(letra)
-        secreto_temp = ''
+        
         for letra_secre in palavra:
             if letra_secre in digitados:
                 secreto_temp += letra_secre
@@ -129,6 +130,11 @@ while True:
         limparTela()
         cabecario()
     elif lol == '3':
+        for letra_secre in palavra:
+            if letra_secre in digitados:
+                secreto_temp += letra_secre
+            else:
+                secreto_temp += ' *'
         chuteR = input('De o seu chute: ')
         if chuteR == palavra:
             limparTela()
@@ -139,10 +145,12 @@ while True:
             print('Aperte ENTER pra sair')
             input() 
             break 
-        elif chuteR != palavra:
+        else:
             erros +=1
             chance -= 1
             desenhaForca(erros)
+            print(f'Palavra secreta: {secreto_temp}')
+            print('\033[1;31mVocê errou!       \033[m')
             print(f'O competidor ainda tem {chance} chances. ')
             continue
 

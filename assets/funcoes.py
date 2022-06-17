@@ -80,13 +80,3 @@ def desenhaForca(erros):
     print(" |            ")
     print("_|___         ")
     print()
-def forcaSozinha():
-    print("  _______     ")
-    print(" |/      |    ")
-    print(" |            ")
-    print(" |            ")
-    print(" |            ")
-    print(" |            ")
-    print(" |            ")
-    print("_|___         ")
-    print()
